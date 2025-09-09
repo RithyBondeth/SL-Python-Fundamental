@@ -59,11 +59,24 @@ print(text)
 print(f"Name: {name}\n")
 print(f"Age: {age}\n")
 
-# String Methods: capitalize(), center()
+# String Methods: capitalize(), center(), encode(), endswith(), find(), format(), index(), isalnum(), isalpha()
 txt = "i love cambodia"
 
 print("Capitalize: ", txt.capitalize())
 print("Center: ", txt.center(20)) # taking 20 spaces
 print(f"Count: {txt.count('love')}") # only 1 "love" in the txt
-print(f"Encode: {txt.encode(encoding="ascii",errors="ignore")}")
+print(f"Encode: {txt.encode(encoding='ascii',errors='namereplace')}")
+print(f"EndsWith: {txt.endswith('C')}")
+print(f"EndsWith: {txt.endswith('a')}")
+print(f"Find: {txt.find('cambodia')}")
 
+_txt = "For only {price:.2f} dollars!"
+print(_txt.format(price = 50))
+
+_sentence = "Hello, My name is {name}. I'm {age} years old"
+_full_sentence = _sentence.format(name = 'Bondeth', age = 22) 
+print(_full_sentence)
+
+print("Index: ", _full_sentence.index("name"))
+print("isalnum: ", _full_sentence.isalnum())
+print("isalpha: ", _full_sentence.isalpha())
