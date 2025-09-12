@@ -15,7 +15,6 @@ print(" Mutable - can be changed after creation")
 print(" Allow duplicates - same value can appear multiple times")
 print(" Dynamic size - can grow and shrink")
 print(" Can store different data types")
-
 print("\n" + "=" * 50)
 print("2. CREATING LISTS")
 print("=" * 50)
