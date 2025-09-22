@@ -203,6 +203,9 @@
 
 # print(Student.get_total_students())
 
+from symbol import decorators
+
+
 class Animal:
     def __init__(self, name, species):
         self.name = name
@@ -243,4 +246,116 @@ dog = Dog(name='Lucky', species='Orange' ,breed='Orange')
 print(f"{dog.get_info()}")
 print(dog.make_sound())
 print(dog.eat())
+
+class Vehicle:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.is_running = False
+
+    def start(self):
+        self.is_running = True
+        return f"{self.brand} {self.model} is running"
+
+    def stop(self):
+        self.is_running = False
+        return f"{self.brand} {self.model} stopped"
+
+    def get_info(self):
+        return f"Year: {self.year} - Brand: {self.brand} - Model: {self.model}"
+
+
+class Car(Vehicle):
+    def __init__(self, brand, model, year, doors):
+        super().__init__(brand, model, year)
+        self.doors = doors
+        self.fuel_travel = 100
+
+    def drive(self):
+        if self.is_running: 
+            self.fuel_travel -= 10
+            return f"Driving the {self.brand} {self.model}. Fuel: {self.fuel_travel}%"
+        return "Car needs to be started first"
+
+    def refuel(self):
+        self.fuel_travel = 100
+        return f"{self.brand} {self.model} refueled to 100%"
+
+v1 = Vehicle('Toyota', 'Bz4x', 2025)
+print(v1.get_info())
+print(v1.start())
+
+bmw = Car('BMW', 'BMW M4', 2024, 2)
+bmw.start()
+print(bmw.drive())
+print(bmw.refuel())
+print(bmw.get_info())
+
+class SuperCar(Car):   
+    def __init__(self, brand, model, year, doors, max_speed):
+        super().__init__(brand, model, year, doors)
+        self.max_speed = max_speed
+        self.turbo_mode = False
+
+    def activate_turbo(self):
+        self.turbo_mode = True 
+        return f"Turbo mode activated! Max speed: {self.max_speed} mph"
+
+    def deactivate_turbo(self):
+        self.turbo_mode = False
+        return "Turbo mode deactivated"
+
+    def race(self):
+        if self.turbo_mode:
+            return f"{self.brand} {self.model} racing at {self.max_speed} mph!"
+        return f"{self.brand} {self.model} racing at normal speed!"
+
+    def get_super_car_info(self):
+        return f"{self.get_info()} - Door: {self.doors} - Max Speed: {self.max_speed}"
+
+    
+xiaomi_su7_max = SuperCar('Xiaomi', 'SU7 Max', 2025, 4, 500)
+print(xiaomi_su7_max.get_super_car_info())
+xiaomi_su7_max.activate_turbo()
+print(f"Racing After Activated Turbo: {xiaomi_su7_max.race()}")
+        
+xiaomi_su7_max.deactivate_turbo()
+print(f"Racing After Deactivated Turbo: {xiaomi_su7_max.race()}")
+
+
+class Flyable:
+    def __init__(self):
+        self.can_fly = True
+    
+    def fly(self):
+        return "Flying through the sky"
+    
+    def land(self):
+        return "Landing safely"
+    
+class Swimmable:
+    def __init__(self) -> None:
+        self.can_swim = True
+
+    def swim(self):
+        return "Swimming in the water"
+
+    def dive(self):
+        return "Diving underwater"
+
+class Duck(Animal, Flyable, Swimmable):
+    def __init__(self, name):
+        Animal.__init__(self, name, "Duck")
+        Flyable.__init__(self) 
+        Swimmable.__init__(self)
+
+    def make_sound(self):
+        return f"{self.name} quacks: Quack! Quack!"
+
+    def migrate(self):
+        return f"{self.name} is migrating south for winter"
+
+
+duck = Duck(name="Donald")
 
